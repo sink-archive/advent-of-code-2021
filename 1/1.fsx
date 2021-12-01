@@ -1,19 +1,22 @@
 #!/usr/bin/env -S dotnet fsi --exec
 
-let countIncreases (list: int list) =
-    let rec countRec list increases prev =
-        match list with
-        | [] -> increases
-        | head::tail ->
-            if head > prev then
-                countRec tail (increases + 1) head
-            else
-                countRec tail increases head
-    
-    countRec list.Tail 0 list.Head
-
-fsi.CommandLineArgs[1].Split(" ")
+// get an int list
+fsi.CommandLineArgs.[1].Split()
 |> Array.map int
 |> Array.toList
-|> countIncreases
+
+// count increases
+|> List.fold
+    (fun (prev, incs) next ->
+        match prev with
+        | None -> (Some(next), incs)
+        | Some (p) ->
+            if next > p then
+                (Some(next), incs + 1)
+            else
+                (Some(next), incs))
+    (None, 0)
+
+// discard the state prev value
+|> snd
 |> printfn "%i"
