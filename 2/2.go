@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strconv"
 	"strings"
@@ -13,7 +14,9 @@ type instr struct {
 }
 
 func main() {
-	raw := strings.Split(os.Args[1], "\n")
+	content, _ := ioutil.ReadFile(os.Args[1])
+
+	raw := strings.Split(string(content), "\n")
 	parsed := []instr{}
 	for _, s := range raw {
 		split := strings.Split(s, " ")
