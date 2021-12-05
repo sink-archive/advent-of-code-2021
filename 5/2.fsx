@@ -25,13 +25,11 @@ let pointCoveredBy90Line (line: line) (point: coord) =
     let covered l =
         let sameXOrY =
             // same y coord as both line vertices
-            (snd (fst l) = snd point
-            && snd (snd l) = snd point)
+            (snd (fst l) = snd point && snd (snd l) = snd point)
             ||
             // same x coord as both line vertices
-            (fst (fst l) = fst point
-            && fst (snd l) = fst point)
-            
+            (fst (fst l) = fst point && fst (snd l) = fst point)
+
         let inBoundsX =
             // inside range of x values
             fst (fst l) <= fst point
