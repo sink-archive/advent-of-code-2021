@@ -52,15 +52,10 @@ let pointCoveredBy45DownLine (line: line) (point: coord) =
         && snd (fst l) < snd (snd l)
         // we arent past the end of the line
         && fst p <= fst (snd l)
-        // rec and check
-        && if fst p < fst (fst l) then
-               // do this check so that we dont start before the first point of the line and recurse off forever
-               false
-           elif fst p = fst (fst l) then
-               // either we hit the line vertex or we didnt
-               snd p = snd (fst l)
-           else
-               covered l (fst p - 1, snd p - 1)
+        // we arent before the start of the line
+        && fst p >= fst (fst l)
+        // must hit the line vertex if we travel up it
+        && fst p - fst (fst l) = snd p - snd (fst l)
 
     covered line point || covered (flip line) point
 
@@ -71,15 +66,10 @@ let pointCoveredBy45UpLine (line: line) (point: coord) =
         && snd (fst l) > snd (snd l)
         // we arent past the end of the line
         && fst p <= fst (snd l)
-        // rec and check
-        && if fst p < fst (fst l) then
-               // do this check so that we dont start before the first point of the line and recurse off forever
-               false
-           elif fst p = fst (fst l) then
-               // either we hit the line vertex or we didnt
-               snd p = snd (fst l)
-           else
-               covered l (fst p - 1, snd p + 1)
+        // we arent before the start of the line
+        && fst p >= fst (fst l)
+        // must hit the line vertex if we travel up it
+        && fst p - fst (fst l) = snd (fst l) - snd p
 
     covered line point || covered (flip line) point
 
