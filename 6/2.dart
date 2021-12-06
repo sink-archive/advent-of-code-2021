@@ -19,19 +19,17 @@ void main() {
   final rawFish = readAllStdin().split(",").map(int.parse).toList();
 
   // setup a list with one slot for each counter
-  var fish = List.filled(10, 0);
+  var fish = List.filled(9, 0);
   // init the array
-  for (final f in rawFish) fish[f + 1]++;
+  for (final f in rawFish) fish[f]++;
 
   // for each day
   for (var i = 0; i < 256; i++) {
-    for (var i = 1; i <= 9; i++) fish[i - 1] = fish[i];
     final fishToReset = fish[0];
-    fish[9] = fishToReset;
-    fish[7] += fishToReset;
+    for (var i = 1; i <= 8; i++) fish[i - 1] = fish[i];
+    fish[8] = fishToReset;
+    fish[6] += fishToReset;
   }
-
-  fish[0] = 0;
 
   print(fish.reduce((c, n) => c + n));
 }
