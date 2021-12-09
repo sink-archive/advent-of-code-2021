@@ -2,7 +2,7 @@
 
 // get a list
 let instructions =
-    fsi.CommandLineArgs.[1].Split("\n")
+    fsi.CommandLineArgs[1].Split("\n")
     |> Array.toList
     |> List.map (fun s ->
         match s.Split(" ") |> Array.toList with

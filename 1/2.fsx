@@ -1,14 +1,14 @@
 #!/usr/bin/env -S dotnet fsi --exec
 
 // get an int list
-let raw = fsi.CommandLineArgs.[1].Split()
+let raw = fsi.CommandLineArgs[1].Split()
           |> Array.map int
           |> Array.toList
 
 // triples
 raw
 |> List.skip 2
-|> List.mapi (fun i e -> raw.[i] + raw.[i + 1] + e)
+|> List.mapi (fun i e -> raw[i] + raw[i + 1] + e)
 
 // count increases
 |> List.fold

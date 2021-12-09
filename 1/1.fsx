@@ -1,7 +1,7 @@
 #!/usr/bin/env -S dotnet fsi --exec
 
 // get an int list
-fsi.CommandLineArgs.[1].Split()
+fsi.CommandLineArgs[1].Split()
 |> Array.map int
 |> Array.toList
 
